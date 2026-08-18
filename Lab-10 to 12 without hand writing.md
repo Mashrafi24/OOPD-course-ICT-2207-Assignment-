@@ -1,12 +1,12 @@
-### 📘 L10 — Spring Boot REST API with JPA/ORM
-# 10.1 — Setting up Spring Boot + REST + JPA
+# 📘 L10 — Spring Boot REST API with JPA/ORM
+## 10.1 — Setting up Spring Boot + REST + JPA
 
 Create a Spring Boot project (via Spring Initializr) with dependencies: spring-boot-starter-web (for REST), spring-boot-starter-data-jpa (for ORM), and the MySQL connector.
 Configure the database connection in application.properties (URL, username, password).
 Write an @Entity class (Model), a Repository interface, and a @RestController (endpoints). Role of embedded Tomcat: Spring Boot bundles a Tomcat server inside the app itself, so you don't need to install or configure a separate server — running the app starts a working web server automatically.
 
 
-10.2 — Practical: JPA Entity + Repository
+## 10.2 — Practical: JPA Entity + Repository
 
 import jakarta.persistence.*;
 
@@ -30,7 +30,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface StudentRepository extends JpaRepository<Student, Long> {
     // no code needed — JpaRepository already gives save(), findAll(), findById(), etc.
 }
-10.3 — Practical: REST Controller
+
+## 10.3 — Practical: REST Controller
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -53,8 +54,9 @@ public class StudentController {
         return repo.save(student);
     }
 }
-### 📘 L11 — Servlet CRUD — District Quiz Game
-# 11.1 — DB schema design A quiz needs to track categories, questions, players, and scores:
+# 📘 L11 — Servlet CRUD — District Quiz Game
+
+## 11.1 — DB schema design A quiz needs to track categories, questions, players, and scores:
 
 CATEGORY(category_id PK, category_name) — e.g. Crops, Geography, Institutions.
 QUESTION(question_id PK, category_id FK, question_text, option_a, option_b, option_c, option_d, correct_option) — each question belongs to one category.
@@ -62,7 +64,7 @@ PLAYER(player_id PK, name) — the person playing.
 PLAYER_SCORE(score_id PK, player_id FK, total_score, played_on) — one row per game session, linking back to the player. Justification: Separating QUESTION from CATEGORY lets you filter/add questions per topic easily. Separating PLAYER from PLAYER_SCORE lets one player have many play sessions (score history) instead of just one score.
 
 
-# 11.2 — Practical: Save player score
+## 11.2 — Practical: Save player score
 
 import java.sql.*;
 import jakarta.servlet.*;
@@ -89,7 +91,7 @@ public class SaveScoreServlet extends HttpServlet {
     }
 }
 
-# 11.3 — Practical: Quiz logic
+## 11.3 — Practical: Quiz logic
 
 import java.util.Scanner;
 
@@ -130,9 +132,9 @@ public class QuizGame {
 }
 
 
-#### 📘 L12 — GoF Design Patterns
+# 📘 L12 — GoF Design Patterns
 
-# 12.1 — Creational patterns (5)
+## 12.1 — Creational patterns (5)
 
 Pattern	Purpose
 Singleton	Ensure only one instance of a class exists, with one global access point
@@ -142,7 +144,7 @@ Builder	Build a complex object step-by-step, separately from its final represent
 Prototype	Create new objects by cloning an existing one
 
 
-# 12.2 — Structural patterns (7)
+## 12.2 — Structural patterns (7)
 
 Pattern	Purpose
 Adapter	Convert one interface into another one the client expects
@@ -153,7 +155,7 @@ Facade	Give a simple front-door interface to a complicated subsystem
 Flyweight	Share common data between many small objects to save memory
 Proxy	Provide a stand-in object that controls access to the real object
 
-# 12.3 — Practical: Singleton (thread-safe) + Adapter
+## 12.3 — Practical: Singleton (thread-safe) + Adapter
 
 // Thread-safe Singleton
 class Singleton {
