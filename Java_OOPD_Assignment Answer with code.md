@@ -1,14 +1,14 @@
 Java Final Exam — Simple Answers (L1–L12, All 36 Questions)
 Written in plain, easy language. Practical answers include short, complete Java code.
 
-📘 L1 — Encapsulation and Polymorphism
+### 📘 L1 — Encapsulation and Polymorphism
 1.1 — What is encapsulation? Encapsulation means locking your data (fields) inside a class and only allowing access through controlled methods (getters/setters). You mark fields private so no one outside the class can touch them directly. If they want to read or change the value, they must go through your public methods, where you can add checks. Real-life analogy: A medicine capsule. The medicine (data) is sealed inside a shell. You can't touch the medicine directly — you only interact with the capsule as a whole (the public interface).
 
-1.2 — What is polymorphism? Polymorphism means "one name, many forms" — the same method name behaves differently depending on the situation.
+## 1.2 — What is polymorphism? Polymorphism means "one name, many forms" — the same method name behaves differently depending on the situation.
 
 Compile-time (static) polymorphism = method overloading. The compiler decides which method to run based on the parameters, before the program even runs. Example: add(int a, int b) vs add(double a, double b).
 Run-time (dynamic) polymorphism = method overriding. The JVM decides which method to run while the program is actually running, based on the real object type. Example: Animal a = new Dog(); a.sound(); — calls Dog's version even though a is declared as Animal.
-1.3 — Practical: BankAccount class
+## 1.3 — Practical: BankAccount class
 
 class BankAccount {
     private double balance;
@@ -38,8 +38,9 @@ public class Main {
         System.out.println("Balance: " + acc.getBalance());
     }
 }
-📘 L2 — Method Overloading vs Overriding (Early vs Late Binding)
-2.1 — Overloading vs Overriding
+### 📘 L2 — Method Overloading vs Overriding (Early vs Late Binding)
+
+## 2.1 — Overloading vs Overriding
 
 Point	Overloading	Overriding
 Definition	Same method name, different parameters	Same method name & parameters, redefined in a subclass
@@ -47,11 +48,11 @@ Class involved	Same class	Parent and child class
 Parameters	Must be different	Must be the same
 Return type	Can differ	Must be same or a subtype (covariant)
 Binding time	Compile time (early binding)	Run time (late binding)
-2.2 — Early vs Late binding
+ ## 2.2 — Early vs Late binding
 
 Early binding: The compiler already knows exactly which method to call, just by looking at the method signature. This happens with overloading, static, private, and final methods.
 Late binding: The compiler doesn't know the final method to call in advance — the JVM checks the actual object at run time and calls the right version. This happens with overriding. Overriding needs late binding because the same reference type (e.g. Shape) can point to different objects (Circle, Rectangle) — Java can't know which one until the program is actually running.
-2.3 — Practical: Shape hierarchy
+## 2.3 — Practical: Shape hierarchy
 
 class Shape {
     public double area() {
@@ -102,8 +103,8 @@ Circle Area: 78.53981633974483
 Rectangle Area: 24.0
 Shape: Circle
 Shape: Rectangle, Sides: 4
-📘 L3 — Abstract Class vs Interface
-3.1 — Definitions & differences
+### 📘 L3 — Abstract Class vs Interface
+## 3.1 — Definitions & differences
 
 Abstract class: A class that cannot be instantiated directly. It can mix finished (concrete) methods with unfinished (abstract) methods that subclasses must complete.
 Interface: A contract listing method signatures with no body (mostly). Any class that implements it must fill in those methods.
@@ -112,11 +113,11 @@ Fields	Can have normal instance variables	Only public static final constants
 Constructors	Yes, can have one	No
 Method bodies	Mix of implemented + abstract methods	Only default/static methods have bodies
 Multiple inheritance	A class can extend only ONE abstract class	A class can implement MANY interfaces
-3.2 — When to choose which
+## 3.2 — When to choose which
 
 Use an abstract class for an "is-a" relationship where subclasses share common code. Example: Vehicle is a base for Car, Bike — they all share startEngine() logic.
 Use an interface for a "can-do" capability that unrelated classes might share. Example: Insurable — a Car, a House, or even a Person could all be insurable, even though they're not related by inheritance.
-3.3 — Practical: Vehicle / Insurable / Car
+## 3.3 — Practical: Vehicle / Insurable / Car
 
 abstract class Vehicle {
     public void startEngine() {
@@ -151,20 +152,20 @@ public class Main {
 }
 Why abstract class for Vehicle: it's clearly an "is-a" relationship, and startEngine() is shared code we don't want to rewrite in every subclass. Why interface for Insurable: being insurable is a capability, not a type of vehicle — other unrelated classes could implement it too.
 
-📘 L4 — Collection Framework
-4.1 — ArrayList vs Vector vs LinkedList
+### 📘 L4 — Collection Framework
+## 4.1 — ArrayList vs Vector vs LinkedList
 
 Feature	ArrayList	Vector	LinkedList
 Structure	Resizable array	Resizable array	Doubly linked list
 Synchronized (thread-safe)	No	Yes	No
 Random access (get by index)	Fast	Fast	Slow (must walk the chain)
 Insert/delete (middle)	Slow (shifts elements)	Slow	Fast (just relinks pointers)
-4.2 — Set and its implementations A Set is a collection that does not allow duplicate elements.
+## 4.2 — Set and its implementations A Set is a collection that does not allow duplicate elements.
 
 HashSet: no guaranteed order, fastest.
 LinkedHashSet: keeps insertion order.
 TreeSet: keeps elements sorted automatically. TreeSet maintains order using a Red-Black Tree internally — every time you add an element, it's placed in the correct sorted position (using natural ordering via Comparable, or a custom Comparator).
-4.3 — Practical: ArrayList vs TreeSet
+## 4.3 — Practical: ArrayList vs TreeSet
 
 import java.util.ArrayList;
 import java.util.TreeSet;
@@ -192,13 +193,15 @@ public class Main {
 }
 Comment: The ArrayList prints names in the exact order they were added. The TreeSet automatically sorts them alphabetically and would also remove any duplicates.
 
-📘 L5 — Multithreading & Custom Exception Handling
-5.1 — Ways to implement multithreading
+### 📘 L5 — Multithreading & Custom Exception Handling
+## 5.1 — Ways to implement multithreading
 
 Extending Thread and overriding run().
 Implementing Runnable and passing it to a Thread object.
 Using ExecutorService/Callable — a thread pool manages threads for you, and Callable can return a result. Preferred: Runnable (or ExecutorService) is generally preferred, because Java only allows single inheritance — if your class extends Thread, it can't extend anything else. Runnable keeps your class free to extend other classes, and separates "the task" from "the thread that runs it."
-5.2 — Practical: two threads printing 1–5
+
+
+## 5.2 — Practical: two threads printing 1–5
 
 class MyThread extends Thread {
     public void run() {
@@ -225,7 +228,8 @@ public class Main {
         t2.start();
     }
 }
-5.3 — Practical: custom checked exception
+
+## 5.3 — Practical: custom checked exception
 
 class InvalidRadiusException extends Exception {
     public InvalidRadiusException(String msg) {
@@ -266,8 +270,9 @@ public class Main {
 }
 Note: in real Java, the import line must be at the very top of the file, above the classes — it's shown here next to Main just for grouping.
 
-📘 L6 — JDBC with MySQL/Oracle (MVC Pattern)
-6.1 — Steps to connect Java to a database via JDBC
+### 📘 L6 — JDBC with MySQL/Oracle (MVC Pattern)
+
+## 6.1 — Steps to connect Java to a database via JDBC
 
 Load/register the JDBC driver (usually automatic since JDBC 4.0).
 Open a connection: Connection con = DriverManager.getConnection(url, user, password);
@@ -275,12 +280,16 @@ Create a statement: PreparedStatement ps = con.prepareStatement(sql);
 Run the query/update: ps.executeQuery() or ps.executeUpdate().
 Process results using ResultSet (for SELECT queries).
 Close the connection. Key classes: DriverManager (creates connections), Connection (represents the DB session), PreparedStatement (runs safe, parameterized SQL), ResultSet (holds query results).
-6.2 — MVC pattern in a JDBC app MVC splits an app into three parts:
+
+## 6.2 — MVC pattern in a JDBC app MVC splits an app into three parts:
 
 Model — the plain data class (e.g. Student) representing one record.
 View — whatever collects input and shows output to the user (e.g. Main, or a JSP page).
 Controller — the class that handles logic and talks to the database (e.g. StudentDAO), sitting between Model and View.
-6.3 — Practical: MVC-style Student insert
+
+
+
+## 6.3 — Practical: MVC-style Student insert
 
 import java.sql.*;
 import java.util.*;
@@ -330,14 +339,20 @@ public class Main {
         System.out.println("Student saved!");
     }
 }
-📘 L7 — JavaFX — House Loan Calculator
-7.1 — JavaFX application structure
+
+
+### 📘 L7 — JavaFX — House Loan Calculator
+
+## 7.1 — JavaFX application structure
 
 Application — the base class every JavaFX app extends; JavaFX calls its start() method to launch the GUI.
 Stage — the actual window on screen.
 Scene — the content that fills the window (like a canvas holding all your UI elements).
 GridPane/VBox — layout containers that arrange buttons, labels, and text fields (grid-style vs vertical-stack style). Role of start(): It's the entry point JavaFX calls automatically after launch — this is where you build the Scene, set up the layout, add event handlers, and show the Stage.
-7.2 — Practical: GridPane layout
+
+
+
+## 7.2 — Practical: GridPane layout
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -395,7 +410,9 @@ public class LoanCalculator extends Application {
         launch(args);
     }
 }
-7.3 — Event handler (already included above) The calcBtn.setOnAction(e -> calculate()) line runs the calculate() method when the button is clicked. It uses the standard loan amortization formula:
+
+
+## 7.3 — Event handler (already included above) The calcBtn.setOnAction(e -> calculate()) line runs the calculate() method when the button is clicked. It uses the standard loan amortization formula:
 
 r = AnnualRate / 12 / 100
 M = P × r × (1 + r)^n / [(1 + r)^n − 1]
@@ -403,11 +420,14 @@ T = M × n
 D = T − P
 Then it updates resultLabel with the Monthly Installment, Total Payment, and Difference.
 
-📘 L8 — Socket Programming & Java RMI (Chat System)
+
+### 📘 L8 — Socket Programming & Java RMI (Chat System)
 8.1 — Socket programming vs Java RMI
 
 Sockets: low-level, you send and receive raw text/bytes yourself over a Socket/ServerSocket connection. You control the exact message format.
 RMI (Remote Method Invocation): high-level, you call a method on a remote object almost like it's local — Java handles the network communication for you. When to prefer each: Use sockets when you need full control over the protocol, cross-language communication, or lightweight custom messaging (like a chat app). Use RMI when you're working purely in Java and want to call remote methods directly without manually building a message protocol.
+
+
 8.2 — Practical: Server code
 
 import java.io.*;
@@ -431,6 +451,8 @@ public class ChatServer {
         serverSocket.close();
     }
 }
+
+
 8.3 — Practical: Client code
 
 import java.io.*;
@@ -450,7 +472,11 @@ public class ChatClient {
         socket.close();
     }
 }
-📘 L9 — Servlet + JSP + JDBC CRUD (Student Records)
+
+
+
+### 📘 L9 — Servlet + JSP + JDBC CRUD (Student Records)
+
 9.1 — Steps to set up the project
 
 Create the MySQL database student_db and a Students table with columns id, name, cgpa.
@@ -458,6 +484,10 @@ Set up a Dynamic Web Project (or Maven web app) in your IDE, add the MySQL JDBC 
 Map the Servlet to a URL pattern (e.g. /addStudent) using @WebServlet or web.xml.
 Build the JDBC connection string, e.g. jdbc:mysql://localhost:3306/student_db.
 Write the Servlet (handles form submissions), a DAO class (does the DB work), and a JSP page (shows results).
+
+
+
+
 9.2 — Practical: Servlet doPost()
 
 import java.io.*;
@@ -487,6 +517,8 @@ public class AddStudentServlet extends HttpServlet {
         }
     }
 }
+
+
 9.3 — Practical: JSP page
 
 <%@ page import="java.sql.*" %>
@@ -514,12 +546,17 @@ public class AddStudentServlet extends HttpServlet {
 </table>
 </body>
 </html>
-📘 L10 — Spring Boot REST API with JPA/ORM
+
+        
+### 📘 L10 — Spring Boot REST API with JPA/ORM
+
 10.1 — Setting up Spring Boot + REST + JPA
 
 Create a Spring Boot project (via Spring Initializr) with dependencies: spring-boot-starter-web (for REST), spring-boot-starter-data-jpa (for ORM), and the MySQL connector.
 Configure the database connection in application.properties (URL, username, password).
 Write an @Entity class (Model), a Repository interface, and a @RestController (endpoints). Role of embedded Tomcat: Spring Boot bundles a Tomcat server inside the app itself, so you don't need to install or configure a separate server — running the app starts a working web server automatically.
+
+
 10.2 — Practical: JPA Entity + Repository
 
 import jakarta.persistence.*;
@@ -544,6 +581,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface StudentRepository extends JpaRepository<Student, Long> {
     // no code needed — JpaRepository already gives save(), findAll(), findById(), etc.
 }
+
+
 10.3 — Practical: REST Controller
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -567,13 +606,18 @@ public class StudentController {
         return repo.save(student);
     }
 }
-📘 L11 — Servlet CRUD — District Quiz Game
+
+
+### 📘 L11 — Servlet CRUD — District Quiz Game
+
 11.1 — DB schema design A quiz needs to track categories, questions, players, and scores:
 
 CATEGORY(category_id PK, category_name) — e.g. Crops, Geography, Institutions.
 QUESTION(question_id PK, category_id FK, question_text, option_a, option_b, option_c, option_d, correct_option) — each question belongs to one category.
 PLAYER(player_id PK, name) — the person playing.
 PLAYER_SCORE(score_id PK, player_id FK, total_score, played_on) — one row per game session, linking back to the player. Justification: Separating QUESTION from CATEGORY lets you filter/add questions per topic easily. Separating PLAYER from PLAYER_SCORE lets one player have many play sessions (score history) instead of just one score.
+
+
 11.2 — Practical: Save player score
 
 import java.sql.*;
@@ -600,6 +644,8 @@ public class SaveScoreServlet extends HttpServlet {
         }
     }
 }
+
+
 11.3 — Practical: Quiz logic
 
 import java.util.Scanner;
@@ -639,7 +685,11 @@ public class QuizGame {
         System.out.println("Final Score: " + score + "/" + questions.length);
     }
 }
-📘 L12 — GoF Design Patterns
+
+
+### 📘 L12 — GoF Design Patterns
+
+
 12.1 — Creational patterns (5)
 
 Pattern	Purpose
@@ -648,6 +698,8 @@ Factory Method	Let subclasses decide which exact object to create
 Abstract Factory	Create families of related objects without specifying their exact classes
 Builder	Build a complex object step-by-step, separately from its final representation
 Prototype	Create new objects by cloning an existing one
+
+
 12.2 — Structural patterns (7)
 
 Pattern	Purpose
@@ -658,6 +710,8 @@ Decorator	Add new behavior to an object dynamically, without changing its class
 Facade	Give a simple front-door interface to a complicated subsystem
 Flyweight	Share common data between many small objects to save memory
 Proxy	Provide a stand-in object that controls access to the real object
+
+
 12.3 — Practical: Singleton (thread-safe) + Adapter
 
 // Thread-safe Singleton
