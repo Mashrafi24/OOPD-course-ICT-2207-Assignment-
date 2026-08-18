@@ -4,6 +4,8 @@
 Create a Spring Boot project (via Spring Initializr) with dependencies: spring-boot-starter-web (for REST), spring-boot-starter-data-jpa (for ORM), and the MySQL connector.
 Configure the database connection in application.properties (URL, username, password).
 Write an @Entity class (Model), a Repository interface, and a @RestController (endpoints). Role of embedded Tomcat: Spring Boot bundles a Tomcat server inside the app itself, so you don't need to install or configure a separate server — running the app starts a working web server automatically.
+
+
 10.2 — Practical: JPA Entity + Repository
 
 import jakarta.persistence.*;
